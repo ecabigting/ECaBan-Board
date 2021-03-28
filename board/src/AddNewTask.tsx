@@ -8,6 +8,8 @@ interface AddNewTaskProps {
     dark: boolean
 }
 
+// 58 global state and business logic
+
 export const AddNewTask = (props: AddNewTaskProps) => {
     const [showForm, setShowForm] = useState(false);
     const { onAdd, toggleButtonText, dark} = props;
