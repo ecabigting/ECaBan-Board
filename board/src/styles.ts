@@ -43,6 +43,16 @@ export const NewTaskFormContainer = styled.div`
     align-items: flex-start;
 `;
 
+export const NewTaskButton = styled.button`
+    background-color: #5aac44;
+    border-radius: 3px;
+    border:none;
+    box-shadow: none;
+    color:#fff;
+    padding: 6px 12px;
+    text-align:center;
+`;
+
 export const NewTaskItemInput = styled.input`
     border-radius: 3px;
     border: none;
