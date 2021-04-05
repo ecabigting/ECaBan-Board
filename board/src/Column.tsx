@@ -7,14 +7,16 @@ import { AddNewTaskButton, ColumnContainer, ColumnTitle } from "./styles";
 
 interface ColumnProps {
     text : string
-    index: number
+    index: number,
+    id: string
 }
 
 export const Column = ({
     text, 
-    index
+    index,
+    id
 } : ColumnProps) => {
-    const {state} = useAppState()
+    const {state,dispatch} = useAppState()
     return (
         <ColumnContainer>
            <ColumnTitle>{text}</ColumnTitle>
@@ -23,7 +25,9 @@ export const Column = ({
            ))}
            <AddNewTask
             toggleButtonText="+ Add another task"
-            onAdd={console.log}
+            onAdd={ text => 
+                dispatch({type:"ADD_TASK",  payload : {text, listId:id }})    
+            }
             dark
            />
         </ColumnContainer>
