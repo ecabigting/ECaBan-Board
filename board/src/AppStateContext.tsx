@@ -35,8 +35,8 @@ const appData : AppState = {
             tasks:[{id:"c2",text:"Build Logic"}]
         },
         {
-            id:"0",
-            text:"To Do",
+            id:"3",
+            text:"For QA",
             tasks:[{id:"c3",text:"Use static typing"}]
         },
     ]
