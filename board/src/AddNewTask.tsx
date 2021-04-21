@@ -8,8 +8,6 @@ interface AddNewTaskProps {
     dark: boolean
 }
 
-// 88 moving items to add
-
 export const AddNewTask = (props: AddNewTaskProps) => {
     const [showForm, setShowForm] = useState(false);
     const { onAdd, toggleButtonText, dark} = props;

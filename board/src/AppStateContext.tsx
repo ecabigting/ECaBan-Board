@@ -1,6 +1,8 @@
 import React, { createContext,useReducer,useContext } from 'react'
 import { nanoid } from 'nanoid'
-import { overrideItemAtIndex, findItemIndexById } from './utils/arrayUtils'
+import { findItemIndexById,overrideItemAtIndex,moveItem} from './utils/arrayUtils'
+import { DragItem } from './DragItem'
+
 interface Task {
     id : string,
     text : string
@@ -18,10 +20,12 @@ interface AppStateContextProps {
 }
 
 export interface AppState {
-    lists: List[]
+    lists: List[],
+    draggedItem : DragItem | undefined
 }
 
 const AppStateContext = createContext<AppStateContextProps>({} as AppStateContextProps)
+
 const appData : AppState = {
     lists : [
         {
@@ -39,7 +43,8 @@ const appData : AppState = {
             text:"For QA",
             tasks:[{id:"c3",text:"Use static typing"}]
         },
-    ]
+    ],
+    draggedItem : undefined
 }
 
 export const useAppState = () => {
@@ -92,6 +97,16 @@ const appStateReducer = (state:AppState, action:Action): AppState =>{
                 )
             }
         }
+        case "MOVE_LIST" : {
+            const { dragIndex , hoverIndex} = action.payload
+            return {
+                ...state,
+                lists: moveItem(state.lists,dragIndex,hoverIndex)
+            }
+        }
+        case "SET_DRAGGED_ITEM" : {
+            return { ...state, draggedItem: action.payload}
+        }
         default: {
             return {...state}
         }
@@ -106,4 +121,12 @@ type Action =
 | {
     type : "ADD_TASK"
     payload: { text: string, listId:string}
+    }
+| {
+    type : "MOVE_LIST"
+    payload: { dragIndex : number, hoverIndex : number }
+    } 
+| {
+    type : "SET_DRAGGED_ITEM"
+    payload : DragItem | undefined
     }
